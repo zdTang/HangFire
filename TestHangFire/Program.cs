@@ -1,4 +1,6 @@
 
+using Hangfire;
+
 namespace TestHangFire
 {
     public class Program
@@ -14,6 +16,9 @@ namespace TestHangFire
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddHangfire(x => x.UseSqlServerStorage("Data Source=.;Initial Catelog=hangfire-webapi-db;Integrated Security=True;Pooling=False"));
+            builder.Services.AddHangfireServer();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -24,6 +29,8 @@ namespace TestHangFire
             }
 
             app.UseHttpsRedirection();
+
+            app.UseHangfireDashboard();// WHY We put it here ??
 
             app.UseAuthorization();
 
