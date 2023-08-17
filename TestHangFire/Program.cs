@@ -16,7 +16,7 @@ namespace TestHangFire
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddHangfire(x => x.UseSqlServerStorage("Data Source=.;Initial Catelog=hangfire-webapi-db;Integrated Security=True;Pooling=False"));
+            builder.Services.AddHangfire(x => x.UseSqlServerStorage("Data Source=localhost,1433;User ID=sa;Password=Tzdsql123@;Initial Catalog=hangfire-webapi-db;TrustServerCertificate=true"));
             builder.Services.AddHangfireServer();
 
             var app = builder.Build();
